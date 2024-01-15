@@ -7,3 +7,13 @@
   --main-error-color: #990000;
   --main-secondary-color: #03dac6;
 }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
