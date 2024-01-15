@@ -1,18 +1,17 @@
 <template>
-  <Navbar />
-  <main class="red">
-    <p class="text-center text-success">Home</p>
-  </main>
+  <MainWrapper>
+    <p class="text-left">Home</p>
+  </MainWrapper>
 </template>
 
 <script>
-import Navbar from '../components/layout/Navbar.vue'
+import MainWrapper from '../components/layout/MainWrapper.vue';
 export default {
   name: 'HomePage',
   components: {
-    Navbar
+    MainWrapper
   }
-}
+};
 </script>
 
 <style>
