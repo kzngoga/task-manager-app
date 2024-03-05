@@ -1,6 +1,21 @@
 <template>
-  <v-btn :variant="variant" :class="customClass" color="primary">
+  <v-btn
+    :variant="variant"
+    :class="customClass"
+    color="primary"
+    @click="handleClick"
+    :disabled="isDisabled || isLoading"
+  >
     {{ buttonText }}
+
+    <v-progress-circular
+      v-if="isLoading"
+      indeterminate
+      color="white"
+      :width="2"
+      size="20"
+      class="ml-3"
+    ></v-progress-circular>
   </v-btn>
 </template>
 
@@ -22,6 +37,16 @@ export default {
     customClass: {
       type: String,
       default: ''
+    },
+    handleClick: {
+      type: Function,
+      required: true
+    },
+    isLoading: {
+      type: Boolean
+    },
+    isDisabled: {
+      type: Boolean
     }
   }
 };

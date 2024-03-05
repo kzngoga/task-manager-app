@@ -1,5 +1,4 @@
 import { adminLogin } from '../../api/authApi';
-import router from '../../router';
 
 const state = () => ({
   isLoading: false,
@@ -35,7 +34,7 @@ const actions = {
       });
 
       if (res.status === 201) {
-        router.push('/');
+        window.location.href = '/';
         localStorage.setItem('TASK_APP_ADMIN_TOKEN', res.data.token);
       }
     } catch (error) {
@@ -60,7 +59,7 @@ const actions = {
   },
   logout() {
     localStorage.removeItem('TASK_APP_ADMIN_TOKEN');
-    window.location.href = '/';
+    window.location.href = '/login';
   }
 };
 

@@ -15,12 +15,19 @@
     </div>
 
     <v-data-table
+      class="mt-3"
       :headers="headers"
       :items="items"
       item-key="name"
       :items-per-page="itemsPerPage"
-      class="mt-3"
-    ></v-data-table>
+      :fixed-header="true"
+      :loading="status === 'laoding'"
+      :no-data-text="'No data available. Please check back later!'"
+    >
+      <template v-slot:loading>
+        <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
@@ -46,6 +53,10 @@ export default {
     itemsPerPage: {
       type: Number,
       default: 5
+    },
+    status: {
+      type: String,
+      default: 'idle'
     }
   }
 };

@@ -2,7 +2,7 @@
   <MainWrapper>
     <div class="w-75 mx-auto">
       <h2 class="font-bold text-center">All Employees</h2>
-      <DataTable :headers="columnHeaders" :items="employees" />
+      <DataTable :headers="columnHeaders" :items="allUsers" :status="requestStatus" />
     </div>
   </MainWrapper>
 </template>
@@ -24,9 +24,26 @@ export default {
         { title: 'Phone No.', value: 'phone' },
         { title: 'Email', value: 'email' },
         { title: 'Manager', value: 'isManager' }
-      ],
-      employees: []
+      ]
     };
+  },
+  computed: {
+    allUsers() {
+      const userGetter = this.$store.getters['employee/allEmployees'];
+      return userGetter.data;
+    },
+    requestStatus() {
+      const userGetter = this.$store.getters['employee/allEmployees'];
+      return userGetter.status;
+    }
+  },
+  methods: {
+    async fetchAllUsers() {
+      this.$store.dispatch('employee/fetchAllEmployees');
+    }
+  },
+  mounted() {
+    this.fetchAllUsers();
   }
 };
 </script>
