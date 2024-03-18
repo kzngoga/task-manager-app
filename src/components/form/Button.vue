@@ -2,7 +2,8 @@
   <v-btn
     :variant="variant"
     :class="customClass"
-    color="primary"
+    :color="color"
+    :type="type"
     @click="handleClick"
     :disabled="isDisabled || isLoading"
   >
@@ -47,6 +48,14 @@ export default {
     },
     isDisabled: {
       type: Boolean
+    },
+    color: {
+      type: String,
+      default: 'primary'
+    },
+    type: {
+      type: String,
+      default: 'button'
     }
   }
 };

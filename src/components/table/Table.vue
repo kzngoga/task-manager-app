@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/valid-v-slot -->
 <template>
   <div class="table-container d-flex flex-column ga-3 mt-5">
     <div class="table-container__header ml-auto d-flex ga-3 align-center">
@@ -11,7 +12,7 @@
         hide-details="auto"
       />
 
-      <FormButton buttonText="New +" variant="elevated" />
+      <FormButton buttonText="New +" variant="elevated" @click="$emit('open-modal')" />
     </div>
 
     <v-data-table
@@ -21,11 +22,18 @@
       item-key="name"
       :items-per-page="itemsPerPage"
       :fixed-header="true"
-      :loading="status === 'laoding'"
+      :loading="status === 'loading'"
       :no-data-text="'No data available. Please check back later!'"
     >
       <template v-slot:loading>
         <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
+      </template>
+
+      <template v-slot:item.isManager="{ value }">
+        <v-chip :color="getColor(value)">
+          <v-icon v-if="value" icon="mdi-check-circle"></v-icon>
+          <v-icon v-else icon="mdi-close"></v-icon>
+        </v-chip>
       </template>
     </v-data-table>
   </div>
@@ -58,12 +66,23 @@ export default {
       type: String,
       default: 'idle'
     }
+  },
+  methods: {
+    getColor(value) {
+      return value ? 'success' : 'error';
+    }
   }
 };
 </script>
 
-<style scoped>
+<style>
 .table-container .table-container__header {
   width: 35%;
+}
+
+.v-table thead th span {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 </style>
